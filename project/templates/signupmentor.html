@@ -1,0 +1,63 @@
+<html>
+<head>
+	<meta name="" caracter="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<title text-allignment=>Create account</title>
+	<title>Mentee</title>
+	
+	<link href="assets/css/style2.css" rel="stylesheet">
+	
+</head>
+<body>
+	<div class="container">
+		<div class="title">Sign up as mentor</div>
+		<form method="POST" action=""><!--action check-->
+			{{ form.hidden_tag() }}
+		    <div class="user-details">
+				<div class="input-box">
+					<span class="details">{{form.fullname.label}}</span><br>
+					{{form.fullname(placeholder="abcd")}}
+<!--					<input type="text" id="name" autofocus placeholder="abcd" required>-->
+				<div>
+				
+				<div class="input-box">
+					<span class="details">{{form.username.label}}</span><br>
+<!--					<input type="text" id="uname" autofocus placeholder="abcd" required>-->
+					{{form.username(placeholder="abcd")}}
+				<div>
+				
+				<div class="input-box">
+					<span class="details">{{form.phone.label}}</span><br>
+					{{form.phone(placeholder="+910123456789")}}
+<!--					<input type="text" id="pnum" autofocus placeholder="+91 123456789" required>-->
+				<div>
+				<div class="input-box">
+					<span class="details">{{form.email.label}}</span><br>
+					{{form.email(placeholder="example@abcd.com")}}
+<!--					<input type="text" id="email" autofocus placeholder="example@abcd.com" required>-->
+				<div>
+				<div class="input-box">
+					<span class="details">{{form.password.label}}</span><br>
+					{{form.password(placeholder="password")}}
+<!--					<input type="text" autofocus placeholder="Enter your password" required>-->
+				<div>
+				<div class="input-box">
+					<span class="details">{{form.confirm_password.label}}</span><br>
+					{{form.confirm_password(placeholder="confirm password")}}
+<!--					<input type="text" id="pword" autofocus placeholder="Confirm your password" required><br>-->
+				</div>
+			
+				<div class="button" >
+					{{form.submit()}}
+<!--					<input type="submit" value="Sign up"><hr>-->
+				</div>
+				
+			
+		</form>
+		</div>
+	</div>
+</body>
+<html>
+
+
+	
