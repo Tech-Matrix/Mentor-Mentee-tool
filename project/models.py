@@ -26,10 +26,32 @@ class User(db.Model, UserMixin):
 
 class Mentor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    hobbies = db.Column(db.String, nullable=True)
+    city = db.Column(db.String, nullable=True)
+    gender = db.Column(db.String, nullable=True)
+    expertise_1 = db.Column(db.String, nullable=True)
+    expertise_2 = db.Column(db.String, nullable=True)
+    expertise_3 = db.Column(db.String, nullable=True)
+    bq_1 = db.Column(db.String, nullable=True)
+    bq_2 = db.Column(db.String, nullable=True)
+    bq_3 = db.Column(db.String, nullable=True)
+    bq_4 = db.Column(db.String, nullable=True)
+    ready = db.Column(db.Boolean, nullable=False, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
 
 
 class Mentee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    hobbies = db.Column(db.String, nullable=True)
+    city = db.Column(db.String, nullable=True)
+    gender_pref = db.Column(db.String, nullable=True)
+    gender = db.Column(db.String, nullable=True)
+    aspiration = db.Column(db.String, nullable=True)
+    bq_1 = db.Column(db.String, nullable=True)
+    bq_2 = db.Column(db.String, nullable=True)
+    bq_3 = db.Column(db.String, nullable=True)
+    bq_4 = db.Column(db.String, nullable=True)
+    ready = db.Column(db.Boolean, nullable=False, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
 
+# mentor = Mentor(hobbies="laughing", city="bangalore", gender="male", expertise_1="art", bq_1="good guy", ready=False, user_id=user.id)

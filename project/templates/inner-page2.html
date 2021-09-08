@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <style>
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+html{
+  height: 100%;
+  font: 16px/1.5 Poppins, Helvetica;
+}
+body{
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+	background-color: #EFF0EB;
+}
+.login{
+  width: 20rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 25px silver;
+  padding: 3rem 3rem 4rem;
+}
+.avatar{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.avatar__image{
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 5px 10px -2px;
+}
+.avatar__name{
+  font-weight: bold;
+}
+.input{
+  padding: 1rem 1.5rem;
+  background: #c0c0c022;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+.input__email,
+.input__password,
+.form__button{
+  display: block;
+  width: 100%;
+}
+.input__email::placeholder,
+.input__password::placeholder{
+  opacity: 0.25;
+}
+.input__label{
+  font-size: 0.65rem;      
+  font-weight: 600;
+  padding-left: 0.15rem;
+  color: #8a8a8a;
+}
+.input__email,
+.input__password{
+  border: 0;
+  height: 1.rem;
+  background: none;
+  font-weight: bold;
+  color: #494949;
+  outline: none;
+	border-bottom: 1px solid transparent;
+}
+.input__email:focus,
+.input__password:focus{
+  border-bottom-color: silver;
+}
+.input__email{
+font-size:16;
+color:white;
+}
+
+.input__password{
+font-size:16;
+color:white;
+}
+
+.avatar__name{
+color:white;
+font-size:24;
+}
+
+.login{
+background-color:black;
+}
+
+
+.form__button{
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: dodgerblue;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 5px #696969AA;
+  cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.05s;
+}
+.form__button:hover{
+  box-shadow: 0 5px 15px #696969;
+}
+.form__button:active{
+  transform: translateY(2px);
+}
+.form__button:last-of-type{
+  margin-top: 1rem;
+}
+</style>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Login Pages</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+ 
+
+  <!-- =======================================================
+  * Template Name: Selecao - v4.3.0
+  * Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="index.html">MENTOR AND MENTEE</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+           <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+		   <li class="dropdown"><a href="#"><span>Create Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Create Mentor Account</a></li>
+			  <li><a href="#">Create Mentee Account</a></li>
+            </ul>
+          </li>
+		  
+          <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="D:\login_mentor.html" target="_blank">Mentor</a></li>
+              <li><a href="D:\login_mentee.html" target="_blank">Mentee</a></li>
+			  <li><a href="D:\login_admin.html" target="_blank">Admin</a></li>
+            </ul>
+          </li>
+		   
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs" style="background-color:teal;color:white">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Login Mentee</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Inner Page2</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="container">
+       <body style="background-color:teal">
+<div class="login">
+  <figure class="avatar">
+    <!--<img src="//picsum.photos/70" alt="Avatar" class="avatar__image">-->
+    <figcaption class="avatar__name">Welcome Mentee</figcaption>
+  </figure>
+  <form class="form">
+    <div class="input">
+      <labe class="input__label" style="color:white;font-size:20">Email</labe>
+      <input type="email" class="input__email" placeholder="MENTOR@mail.com">
+    </div>
+    <div class="input">
+      <labe class="input__label" style="color:white;font-size:20">Password</labe>
+      <input type="password" class="input__password" placeholder="····" >
+    </div>
+  </form>
+  <button class="form__button">Log in</button>
+ </body>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" style="background-color:teal">
+    <div class="container">
+      <h3>MENTOR AND MENTEE</h3>
+      <p>WE WILL ALWAYS BE THERE FOR YOU, HELPING YOU ACHIEVE YOUR GOALS</p>
+      <div class="social-links">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+      <div class="copyright">
+        &copy; Copyright <strong><span>MENTOR AND MENTEE</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/selecao-bootstrap-template/ -->
+        MENTOR AND MENTEE <a href="index.html">Here to help</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
