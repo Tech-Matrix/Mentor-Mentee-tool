@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello World!!</h1>
+<h1>Hello {{my_var}}!!</h1>
 {% if current_user.is_authenticated %}
     <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
     <a class="nav-item nav-link" href="{{ url_for('home') }}">Account</a>

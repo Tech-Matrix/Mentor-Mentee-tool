@@ -13,10 +13,10 @@ def login_required(role="ANY"):
         @wraps(fn)
         def decorated_view(*args, **kwargs):
 
-            if not current_user.is_authenticated():
-               return app.login_manager.unauthorized()
+            if not current_user.is_authenticated:
+                return app.login_manager.unauthorized()
             urole = app.login_manager.reload_user().get_urole()
-            if ( (urole != role) and (role != "ANY")):
+            if (urole != role) and (role != "ANY"):
                 return app.login_manager.unauthorized()
             return fn(*args, **kwargs)
         return decorated_view
@@ -34,12 +34,12 @@ def home():
               """ % (form.name.data, form.email.data, form.message.data)
         mail.send(msg)
         return redirect(url_for("home"))
-    return render_template('home.html', form=form)
+    return render_template('index.html', form=form)
 
 
 @app.route("/login")
 def login():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/login-mentor", methods=['GET', 'POST'])
@@ -55,7 +55,7 @@ def login_mentor():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login_mentor.html', form=form)
+    return render_template('loginmentor.html', form=form)
 
 
 @app.route("/login-mentee", methods=['GET', 'POST'])
@@ -71,12 +71,12 @@ def login_mentee():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login_mentee.html', form=form)
+    return render_template('loginmentee.html', form=form)
 
 
 @app.route("/register")
 def register():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/register-mentor", methods=['GET', 'POST'])
@@ -95,7 +95,8 @@ def register_mentor():
         flash('Your account has been created! You are now logged in', 'success')
         next_page = request.args.get('next')
         return redirect(next_page) if next_page else redirect(url_for('home'))
-    return render_template('signupmentor.html', form=form)
+    my_var = "Everyone"
+    return render_template('signupmentor.html', form=form, my_var="Everyone")
 
 
 @app.route("/register-mentee", methods=['GET', 'POST'])
@@ -124,18 +125,18 @@ def profile():
         pass
     elif current_user.urole == "MENTEE":
         pass
-    return render_template('home.html')
+    return render_template('userprofile.html')
 
 
 @app.route("/admin-login")
 def admin_login():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/admin-page")
 @login_required(role="ADMIN")
 def admin_page():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/logout")

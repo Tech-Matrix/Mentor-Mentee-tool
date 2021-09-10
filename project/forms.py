@@ -11,7 +11,7 @@ class RegistrationForm(FlaskForm):
     fullname = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=50)])
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    phone = StringField('Phone', validators=[DataRequired(), Length(min=13, max=13)])
+    phone = StringField('Phone', validators=[DataRequired(), Length(min=8, max=15)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -29,15 +29,15 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
 
-    def validate_phone(self, phone):
-        try:
-            input_number = phonenumbers.parse(phone.data)
-            if not (phonenumbers.is_valid_number(input_number)):
-                raise ValidationError('Invalid phone number.')
-        except:
-            input_number = phonenumbers.parse("+91" + phone.data)
-            if not (phonenumbers.is_valid_number(input_number)):
-                raise ValidationError('Invalid phone number.')
+    # def validate_phone(self, phone):
+    #     try:
+    #         input_number = phonenumbers.parse(phone.data)
+    #         if not (phonenumbers.is_valid_number(input_number)):
+    #             raise ValidationError('Invalid phone number.')
+    #     except:
+    #         input_number = phonenumbers.parse("+91" + phone.data)
+    #         if not (phonenumbers.is_valid_number(input_number)):
+    #             raise ValidationError('Invalid phone number.')
 
 
 class LoginForm(FlaskForm):
@@ -63,8 +63,6 @@ class MenteeForm(FlaskForm):
     interest = SelectField('interest', choices=expertise_l)
     b1 = TextAreaField("Qusetion 1", validators=[DataRequired(), Length(min=10)])
     b2 = TextAreaField("Qusetion 2", validators=[DataRequired(), Length(min=10)])
-    b3 = TextAreaField("Qusetion 3", validators=[DataRequired(), Length(min=10)])
-    b4 = TextAreaField("Qusetion 4", validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
@@ -98,11 +96,9 @@ class MentorForm(FlaskForm):
     gender = SelectField('gender', choices=[('Male', 'Male'), ('Female', 'Female')])
     city = SelectField('city', choices=[('bangalore', 'Bangalore'), ('chennai', 'Chennai'), ('hyderabad', 'Hyderabad'),
                                         ('delhi', 'Delhi')])
-    expertise = SelectMultipleField('expertise', choices=expertise_l)
+    expertise = SelectField('expertise', choices=expertise_l)
     b1 = TextAreaField("Qusetion 1", validators=[DataRequired(), Length(min=10)])
     b2 = TextAreaField("Qusetion 2", validators=[DataRequired(), Length(min=10)])
-    b3 = TextAreaField("Qusetion 3", validators=[DataRequired(), Length(min=10)])
-    b4 = TextAreaField("Qusetion 4", validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Update')
 
     def validate_username(self, username):

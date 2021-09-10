@@ -2,18 +2,126 @@
 <html lang="en">
 
 <head>
+ <style>
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+html{
+  height: 100%;
+  font: 16px/1.5 Poppins, Helvetica;
+}
+body{
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+	background-color: #EFF0EB;
+}
+.login{
+  width: 20rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 25px silver;
+  padding: 3rem 3rem 4rem;
+}
+.avatar{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.avatar__image{
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 5px 10px -2px;
+}
+.avatar__name{
+  font-weight: bold;
+}
+.input{
+  padding: 1rem 1.5rem;
+  background: #c0c0c022;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+.input__email,
+.input__password,
+.form__button{
+  display: block;
+  width: 100%;
+}
+.input__email::placeholder,
+.input__password::placeholder{
+  opacity: 0.25;
+}
+.input__label{
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding-left: 0.15rem;
+  color: #8a8a8a;
+}
+.input__email,
+.input__password{
+  border: 0;
+  height: 1.rem;
+  background: none;
+  font-weight: bold;
+  color: #494949;
+  outline: none;
+	border-bottom: 1px solid transparent;
+}
+.input__email:focus,
+.input__password:focus{
+  border-bottom-color: silver;
+}
+.input__email{
+font-size:16;
+color:white;
+}
 
+.input__password{
+font-size:16;
+color:white;
+}
+
+.avatar__name{
+color:white;
+font-size:24;
+}
+
+.login{
+background-color:black;
+}
+
+
+.form__button{
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: dodgerblue;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 5px #696969AA;
+  cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.05s;
+}
+.form__button:hover{
+  box-shadow: 0 5px 15px #696969;
+}
+.form__button:active{
+  transform: translateY(2px);
+}
+.form__button:last-of-type{
+  margin-top: 1rem;
+}
 </style>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sign up page</title>
+  <title>Login Pages</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.jpg" rel="icon">
-  <link href="assets/img/apple-touch-icon.jpg" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -30,145 +138,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <!-- Templte inner page sign up file-->
-<style>
 
-		 :focus{
-			outline: none;
-		}
-		.holder{
-			width: 440px;
-			background: #00000;
-			height: 630px;
-			margin: 50px auto;
-			outline: 5px solid #f2f2f2;
-			box-shadow: 0px 0px 15px 5px black;
-
-		}
-		.holder .parent{
-			background-color: #ffffff;
-			width: calc(100% - 50px);
-			height: calc(100% - 50px);
-			display: inline-block;
-			margin-left: 25px;
-			margin-top: 25px;
-			border-radius: 7px;
-		}
-		.holder .parent h2{
-			text-align: center;
-			font-weight:300px;
-			font-size: 30px;
-			padding:2px;
-			margin-top:5px;
-			margin-bottom: 7px;
-		}
-		.holder .parent h3{
-			text-align: center;
-			font-weight:300px;
-			font-size: 25px;
-			padding:1px;
-			margin-bottom: 10;
-		}
-		form{
-			display: block;
-			margin-left: 20px;
-			margin-right: 20px;
-		}
-		form > div{
-			margin: 20px;
-			padding: 10px;
-			border-bottom: 1px solid #ccc;
-			position: relative;
-		}
-		form > div::before{
-
-			font-weight: 900;
-			font-family: "Times New Roman",sans-serif;
-			position: absolute;
-			color: #777;
-
-		}
-
-		form div input{
-			border: none;
-			font-family: "Times New Roman", sans-serif;
-			font-size: 20px;
-			border:2px;
-			margin-left: 10px;
-		}
-		div input + .border{
-			position: absolute;
-			left: 50%;
-			bottom: -1px;
-			background-color: orange;
-			height: 1px;
-			width: 0;
-			transition: .5s;
-			display: block;
-		}
-		div input:focus + .border{
-			width: 100%;
-			left: 0;
-		}
-		form .submit{
-			border: none;
-			font-family: "Times New Roman",sans-serif;
-			display: block;
-			margin: auto;
-			background: #2196f3ed;
-			width: 60%;
-			padding: 5px;
-			border-radius: 7px;
-			margin-bottom: 8px;
-			color:#ffffff ;
-			font-size: 20px;
-			font-weight: bold;
-			cursor: pointer;
-		}
-		form p{
-			margin: 20px;
-			text-align: center;
-			font-size: 18px;
-			color: #777;
-			padding: 15px;
-		}
-		form p a{
-			text-decoration: none;
-			font-weight: bold;
-			color: #2196f3ed;
-		}
-
-		:focus::placeholder{
-			opacity: 20%;
-			transition: .5s;
-		}
-
-		form .submit:hover{
-		  box-shadow: 0 5px 15px #696969;
-		}
-		form .submit:active{
-		  transform: translateY(2px);
-		}
-		/*form .submit:last-of-type{
-		  margin-top: 1rem;
-		}*/
-		form .submit{
-			border: none;
-			font-family: "Times New Roman",sans-serif;
-			display: block;
-			margin: auto;
-			background: #2196f3ed;
-			width: 60%;
-			padding: 5px;
-			border-radius: 7px;
-			margin-bottom: 8px;
-			transition: box-shadow 0.25s, transform 0.05s;
-			color:#ffffff ;
-			font-size: 20px;
-			font-weight: bold;
-			cursor: pointer;
-		}
-</style>
 
   <!-- =======================================================
   * Template Name: Selecao - v4.3.0
@@ -178,7 +148,7 @@
   ======================================================== -->
 </head>
 
-<body style="background-color:teal;">
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
@@ -186,9 +156,7 @@
 
       <div class="logo">
         <h1><a href="index.html">MENTOR AND MENTEE</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
+         </div>
 
            <nav id="navbar" class="navbar">
         <ul>
@@ -198,15 +166,15 @@
 		   <li class="dropdown"><a href="#"><span>Create Account</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="signupmentor.html">Create Mentor Account</a></li>
-			  <li><a href="#">Create Mentee Account</a></li>
+			  <li><a href="signupmntee.html">Create Mentee Account</a></li>
             </ul>
           </li>
 
           <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="loginmentor.html">Mentor</a></li>
-              <li><a href="loginmentee.html">Mentee</a></li>
-			  <li><a href="loginadmin.html">Admin</a></li>
+              <li><a href="#" target="_blank">Mentor</a></li>
+              <li><a href="loginmentee.html" >Mentee</a></li>
+			  <li><a href="loginadmin.html" >Admin</a></li>
             </ul>
           </li>
 
@@ -225,61 +193,38 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Sign Up Mentee</h2>
+          <h2>Login Mentor</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Sign up</li>
+            <li>login page</li>
           </ol>
         </div>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
-
+    <section class="inner-page">
       <div class="container">
-       <body>
-				<div class="holder">
-				<div class="parent">
-				<h2>Create Account</h2>
-				<h3>Mentee</h3>
-				<form action="">
-						<div>
-						<input type="text" id="name" placeholder="Full Name"required/>
-
-						<span class="border"></span>
-						</div>
-						<div>
-						<input type="text" id="uname" placeholder="Username"required/>
-
-						<span class="border"></span>
-						</div>
-
-						<div>
-						<input type="email" id="email" placeholder="Email" required/>
-
-						<span class="border"></span>
-						</div>
-						<div>
-						<input type="password" id="pw1" placeholder="Password"required/>
-
-						<span class="border"></span>
-						</div>
-						<div>
-						<input type="text" id="pw2" placeholder="Confirm Password"required/>
-
-						<span class="border"></span>
-						</div>
-						<div>
-						<input type="submit" value="Sign Up" class="submit">
-						<p>already have an account?<a href="#">Login</a></p>
-						</form>
-
-
-					</div>
-				</div>
-		</body>
-
-
+       <body style="background-color:teal">
+<div class="login">
+  <figure class="avatar">
+    <!--<img src="//picsum.photos/70" alt="Avatar" class="avatar__image">-->
+    <figcaption class="avatar__name">Welcome Mentor</figcaption>
+  </figure>
+  <form class="form">
+    <div class="input">
+      <labe class="input__label" style="color:white;font-size:20">Email</labe>
+      <input type="email" class="input__email" placeholder="MENTOR@mail.com">
+    </div>
+    <div class="input">
+      <labe class="input__label" style="color:white;font-size:20">Password</labe>
+      <input type="password" class="input__password" placeholder="····" >
+    </div>
+  </form>
+  <button class="form__button">Log in</button>
+ </body>
+      </div>
+    </section>
 
   </main><!-- End #main -->
 
@@ -288,7 +233,7 @@
     <div class="container">
       <h3>MENTOR AND MENTEE</h3>
       <p>WE WILL ALWAYS BE THERE FOR YOU, HELPING YOU ACHIEVE YOUR GOALS</p>
-      <div class="social-links">
+     <div class="social-links">
         <a href="https://twitter.com/?lang=en" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
