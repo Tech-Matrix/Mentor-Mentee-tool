@@ -3,7 +3,7 @@ from functools import wraps
 import secrets
 from flask import render_template, url_for, flash, redirect, request, abort
 from project import app, db, bcrypt, mail
-from project.forms import RegistrationForm, LoginForm, ContactForm, MenteeForm, MentorForm, ConnectForm,DisconnectForm
+from project.forms import RegistrationForm, LoginForm, ContactForm, MenteeForm, MentorForm, ConnectForm,DisconnectForm, FindForm
 from project.models import User, Mentor, Mentee
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -12,6 +12,9 @@ from geopy.geocoders import Nominatim
 from timezonefinder import TimezoneFinder
 import datetime
 import pytz
+
+import pandas as pd
+from ML_model2 import model
 
 
 tf = TimezoneFinder()
@@ -130,9 +133,12 @@ def register_mentee():
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required(role="ANY")
 def profile():
+    print(User.query.get(1))
     ready = False
+    pot_mentors = []
     connect_form = ConnectForm()
     disconnect_form = DisconnectForm()
+    find_form = FindForm()
     form = MentorForm()
     form2 = MenteeForm()
     print(current_user.urole)
@@ -154,10 +160,7 @@ def profile():
             form2.b2.data = mentee.bq_2
             form2.hobbies.data = mentee.hobbies
         else:
-            print("Inside else")
-            print(form2.validate_on_submit(), form2.submit2.data)
             if form2.validate_on_submit() and form2.submit2.data:
-                print("Inside form")
                 current_user.fullname = form2.fullname.data
                 current_user.username = form2.username.data
                 current_user.email = form2.email.data
@@ -200,15 +203,43 @@ def profile():
                 return redirect(url_for('profile'))
 
             if connect_form.validate_on_submit() and connect_form.connect.data:
-                pass
+                mentor_to_connect_id = request.form.get('mentor_to_connect')
+                mentor_to_connct = Mentor.query.filter_by(id=mentor_to_connect_id).first()
+                if mentor_to_connct:
+                    mentee.connect(mentor_to_connct)
+                    # flash
+                    return redirect(url_for('profile'))
+                else:
+                    # flash
+                    return redirect(url_for('profile'))
+
             if disconnect_form.validate_on_submit() and disconnect_form.disconnect.data:
-                pass
+                mentee.disconnect()
+                # flash
+                return redirect(url_for('profile'))
+
+            if find_form.validate_on_submit() and find_form.find.data:
+                df = model()
+                print(df)
+                print("User ID:", current_user.id)
+                assigned_cluster = df.iloc[current_user.id-1, -1]
+                print("Assigned cluster:", assigned_cluster)
+                df["id"] = [i for i in range(1, df.shape[0] + 1)]
+                df = df.loc[df["Cluster #"]==assigned_cluster]
+                for ind in df.index:
+                    print(df["id"][ind])
+                    id = df["id"][ind]
+                    pot_user = User.query.all()[id-1]
+                    if pot_user and pot_user.urole == "MENTOR" and pot_user.mentor.gender == mentee.gender_pref and pot_user.mentor.language == mentee.language_pref:
+                        pot_mentors.append(pot_user.mentor)
+                        return redirect(url_for('profile'))
 
     elif current_user.urole == "MENTOR":
         mentor = current_user.mentor
         ready = current_user.mentor.ready
 
         if request.method == 'GET':
+
             form.fullname.data = current_user.fullname
             form.username.data = current_user.username
             form.email.data = current_user.email
@@ -262,8 +293,8 @@ def profile():
                 flash('Your account has been updated!', 'success')
                 return redirect(url_for('profile'))
 
-    return render_template('userprofile.html', mentorform=form, menteeform=form2, ready=ready,
-                           connect_form=connect_form, disconnect_form=disconnect_form)
+    return render_template('userprofile.html', mentorform=form, menteeform=form2, ready=ready, find_form=find_form,
+                           connect_form=connect_form, disconnect_form=disconnect_form, pot_mentors=pot_mentors)
 
 
 @app.route("/admin-login")

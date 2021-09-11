@@ -145,5 +145,9 @@ class ConnectForm(FlaskForm):
     connect = SubmitField(label='Connect With Mentor')
 
 
+class FindForm(FlaskForm):
+    find = SubmitField(label='Find Mentors')
+
+
 class DisconnectForm(FlaskForm):
     disconnect = SubmitField(label='Disconnect!')

@@ -213,17 +213,31 @@ background-color:black;
     <!--<img src="//picsum.photos/70" alt="Avatar" class="avatar__image">-->
     <figcaption class="avatar__name">Welcome Mentee</figcaption>
   </figure>
-  <form class="form">
+<!--  <form class="form">-->
+<!--    <div class="input">-->
+<!--      <labe class="input__label" style="color:white;font-size:20">Email</labe>-->
+<!--      <input type="email" class="input__email" placeholder="MENTOR@mail.com">-->
+<!--    </div>-->
+<!--    <div class="input">-->
+<!--      <labe class="input__label" style="color:white;font-size:20">Password</labe>-->
+<!--      <input type="password" class="input__password" placeholder="····" >-->
+<!--    </div>-->
+<!--  </form>-->
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
     <div class="input">
-      <labe class="input__label" style="color:white;font-size:20">Email</labe>
-      <input type="email" class="input__email" placeholder="MENTOR@mail.com">
+      <labe class="input__label" style="color:white;font-size:20">{{form.email.label}}</labe>
+<!--      <input type="email" class="input__email" placeholder="MENTOR@mail.com">-->
+      {{form.email(class="input__email", placeholder="MENTOR@mail.com")}}
     </div>
     <div class="input">
-      <labe class="input__label" style="color:white;font-size:20">Password</labe>
-      <input type="password" class="input__password" placeholder="····" >
+      <labe class="input__label" style="color:white;font-size:20">{{form.password.label}}</labe>
+      {{form.password(class="input__password", placeholder=".....")}}
+<!--      <input type="password" class="input__password" placeholder="····" >-->
     </div>
+    {{form.submit(class="form__button")}}
   </form>
-  <button class="form__button">Log in</button>
+<!--  <button class="form__button">Log in</button>-->
  </body>
       </div>
     </section>

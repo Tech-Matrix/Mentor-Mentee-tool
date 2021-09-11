@@ -58,4 +58,12 @@ class Mentee(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
     mentor_id = db.Column(db.Integer, db.ForeignKey('mentor.id'), unique=True, nullable=True)
 
+    def connect(self, mentor):
+        self.mentor = mentor
+        db.session.commit()
+
+    def disconnect(self):
+        self.mentor = None
+        db.session.commit()
+
 # mentor = Mentor(hobbies="laughing", city="bangalore", gender="male", expertise_1="art", bq_1="good guy", ready=False, user_id=user.id)

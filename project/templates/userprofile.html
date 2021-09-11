@@ -545,29 +545,54 @@ label{
 	 <div class="container2">
 		<div class="mentor_text">
 			<p>
-			Name:{{current_user.mentee.mentor.fullname}}<br>
-			Number:{{current_user.mentee.mentor.phone}}<br>
-			email:abc@{{current_user.mentee.mentor.email}}.com<br>
+			Name:{{current_user.mentee.mentor.user.fullname}}<br>
+			Number:{{current_user.mentee.mentor.user.phone}}<br>
+			email:{{current_user.mentee.mentor.user.email}}<br>
 			language-known:{{current_user.mentee.mentor.language}}<br>
 			subject:{{current_user.mentee.mentor.expertise_1}}<br>
 			</p>
-			<button class="inner_btn" name="inn-button">connect</button>
+<!--			<button class="inner_btn" name="inn-button">connect</button>-->
 		</div>
-		<button class="btn2" name="button2">Disconnect</button>
+		<form method="POST">
+          {{ disconnect_form.hidden_tag() }}
+          {{ disconnect_form.disconnect(class="btn2") }}
+        </form>
+<!--		<button class="btn2" name="button2">Disconnect</button>-->
 	 </div>
  	{% else %}
- 	 <button class="btn1" name="button1">click to connect to mentor</button>
+		{% for pot_mentor in pot_mentors %}
+			 <div class="mentor_text">
+				<p>
+				Name:{{pot_mentor.user.fullname}}<br>
+				Number:{{pot_mentor.user.phone}}<br>
+				email:{{pot_mentor.user.email}}<br>
+				language-known:{{pot_mentor.language}}<br>
+				subject:{{pot_mentor.expertise_1}}<br>
+				</p>
+				<form method="POST">
+				  {{ connect_form.hidden_tag() }}
+				  <input id="mentor_to_connect" name="mentor_to_connect" value="{{pot_mentor.id}}" type="hidden">
+				  {{ connect_form.connect(class="btn2") }}
+				</form>
+			</div>
+
+		{% endfor %}
+ 		<form method="POST">
+          {{ find_form.hidden_tag() }}
+          {{ find_form.find(class="btn2") }}
+        </form>
+<!-- 	 <button class="btn1" name="button1">click to connect to mentor</button>-->
  	{% endif %}
 
  {% else %}
- 	{% if current_user.mentees|length > 0 %}
- 		{% for mentee in current_user.mentees %}
+ 	{% if current_user.mentor.mentees|length > 0 %}
+ 		{% for mentee in current_user.mentor.mentees %}
  			<div class="container2">
 				<div class="mentor_text">
 					<p>
-					Name:{{mentee.fullname}}<br>
-					Number:{{mentee.phone}}<br>
-					email:abc@{{mentee.email}}.com<br>
+					Name:{{mentee.user.fullname}}<br>
+					Number:{{mentee.user.phone}}<br>
+					email:{{mentee.user.email}}<br>
 					gender:{{mentee.gender}}<br>
 					location:{{mentee.city}}<br>
 					mentee-aspiration:{{mentee.aspiration}}<br>
