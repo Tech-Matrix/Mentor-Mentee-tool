@@ -1,5 +1,5 @@
 import random
-from project import db
+from project import db, bcrypt
 from project.models import User, Mentor, Mentee
 from faker import Faker
 import pandas as pd
@@ -42,7 +42,7 @@ for _ in range(num):
         username=profile["username"],
         email=profile["mail"],
         phone=fake.msisdn(),
-        password=fake.password(), # bcrypt.generate_password_hash(fake.password()).decode('utf-8')
+        password=bcrypt.generate_password_hash("psdv").decode('utf-8'),
         urole=urole
     )
     db.session.add(user)

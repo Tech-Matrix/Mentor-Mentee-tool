@@ -218,45 +218,51 @@
 				<h3>Mentor</h3>
 		<form method="POST" action=""><!--action check-->
 			{{ form.hidden_tag() }}
-		    <div class="user-details">
-				<div class="input-box">
-					<span class="details">{{form.fullname.label}}</span><br>
-					{{form.fullname(placeholder="abcd", id="name")}}
+				<div>
+<!--					<span class="details">{{form.fullname.label}}</span><br>-->
+					{{form.fullname(placeholder="Full Name", id="name")}}
 <!--					<input type="text" id="name" autofocus placeholder="abcd" required>-->
-				<div>
+                    <span class="border"></span>
+				</div>
 				
-				<div class="input-box">
-					<span class="details">{{form.username.label}}</span><br>
+				<div>
+<!--					<span class="details">{{form.username.label}}</span><br>-->
 <!--					<input type="text" id="uname" autofocus placeholder="abcd" required>-->
-					{{form.username(placeholder="abcd")}}
-				<div>
+					{{form.username(placeholder="Username", id="uname")}}
+                    <span class="border"></span>
+				</div>
 				
-				<div class="input-box">
-					<span class="details">{{form.phone.label}}</span><br>
+				<div>
+<!--					<span class="details">{{form.phone.label}}</span><br>-->
 					{{form.phone(placeholder="+910123456789")}}
 <!--					<input type="text" id="pnum" autofocus placeholder="+91 123456789" required>-->
+                    <span class="border"></span>
+				</div>
 				<div>
-				<div class="input-box">
-					<span class="details">{{form.email.label}}</span><br>
-					{{form.email(placeholder="example@abcd.com")}}
+<!--					<span class="details">{{form.email.label}}</span><br>-->
+					{{form.email(placeholder="example@abcd.com", id="email")}}
 <!--					<input type="text" id="email" autofocus placeholder="example@abcd.com" required>-->
+                    <span class="border"></span>
+				</div>
 				<div>
-				<div class="input-box">
-					<span class="details">{{form.password.label}}</span><br>
-					{{form.password(placeholder="password")}}
+<!--					<span class="details">{{form.password.label}}</span><br>-->
+					{{form.password(placeholder="Password", id="pw1")}}
 <!--					<input type="text" autofocus placeholder="Enter your password" required>-->
+                    <span class="border"></span>
+				</div>
 				<div>
-				<div class="input-box">
-					<span class="details">{{form.confirm_password.label}}</span><br>
-					{{form.confirm_password(placeholder="confirm password")}}
+<!--					<span class="details">{{form.confirm_password.label}}</span><br>-->
+					{{form.confirm_password(placeholder="Confirm Password", id="pw2")}}
 <!--					<input type="text" id="pword" autofocus placeholder="Confirm your password" required><br>-->
+                    <span class="border"></span>
 				</div>
-			
-				<div class="button" >
-					{{form.submit()}}
+
+                <div>
+					{{form.submit(class="submit")}}
 <!--					<input type="submit" value="Sign up"><hr>-->
-				</div>
-				
+                    <br>
+                    <p>already have an account?<a href="{{url_for('login_mentor')}}">Login</a></p>
+                </div>
 			
 		</form>
 				</div>

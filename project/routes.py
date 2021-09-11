@@ -15,7 +15,7 @@ def login_required(role="ANY"):
 
             if not current_user.is_authenticated:
                 return app.login_manager.unauthorized()
-            urole = app.login_manager.reload_user().get_urole()
+            urole = current_user.urole # app.login_manager.reload_user().get_urole()
             if (urole != role) and (role != "ANY"):
                 return app.login_manager.unauthorized()
             return fn(*args, **kwargs)
