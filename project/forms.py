@@ -142,7 +142,7 @@ class ContactForm(FlaskForm):
 
 
 class ConnectForm(FlaskForm):
-    connect = SubmitField(label='Connect With Mentor')
+    connect = SubmitField(label='Connect')
 
 
 class FindForm(FlaskForm):

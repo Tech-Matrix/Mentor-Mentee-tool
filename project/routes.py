@@ -219,6 +219,18 @@ def profile():
                 return redirect(url_for('profile'))
 
             if find_form.validate_on_submit() and find_form.find.data:
+                form2.fullname.data = current_user.fullname
+                form2.username.data = current_user.username
+                form2.email.data = current_user.email
+                form2.phone.data = current_user.phone
+                form2.city.data = mentee.city
+                form2.gender.data = mentee.gender
+                form2.gender_pref.data = mentee.gender_pref
+                form2.language_pref.data = mentee.language_pref
+                form2.aspiration.data = mentee.aspiration
+                form2.b1.data = mentee.bq_1
+                form2.b2.data = mentee.bq_2
+                form2.hobbies.data = mentee.hobbies
                 df = model()
                 print(df)
                 print("User ID:", current_user.id)
@@ -232,7 +244,6 @@ def profile():
                     pot_user = User.query.all()[id-1]
                     if pot_user and pot_user.urole == "MENTOR" and pot_user.mentor.gender == mentee.gender_pref and pot_user.mentor.language == mentee.language_pref:
                         pot_mentors.append(pot_user.mentor)
-                        return redirect(url_for('profile'))
 
     elif current_user.urole == "MENTOR":
         mentor = current_user.mentor
