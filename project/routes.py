@@ -3,10 +3,19 @@ from functools import wraps
 import secrets
 from flask import render_template, url_for, flash, redirect, request, abort
 from project import app, db, bcrypt, mail
-from project.forms import RegistrationForm, LoginForm, ContactForm
+from project.forms import RegistrationForm, LoginForm, ContactForm, MenteeForm, MentorForm, ConnectForm,DisconnectForm
 from project.models import User, Mentor, Mentee
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
+
+from geopy.geocoders import Nominatim
+from timezonefinder import TimezoneFinder
+import datetime
+import pytz
+
+
+tf = TimezoneFinder()
+geolocator = Nominatim(user_agent='myapplication')
 
 def login_required(role="ANY"):
     def wrapper(fn):
@@ -118,14 +127,143 @@ def register_mentee():
     return render_template('signupmentee.html', form=form)
 
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET', 'POST'])
 @login_required(role="ANY")
 def profile():
-    if current_user.urole == "MENTOR":
-        pass
-    elif current_user.urole == "MENTEE":
-        pass
-    return render_template('userprofile.html')
+    ready = False
+    connect_form = ConnectForm()
+    disconnect_form = DisconnectForm()
+    form = MentorForm()
+    form2 = MenteeForm()
+    print(current_user.urole)
+    if current_user.urole == "MENTEE":
+        print("Inside mentee")
+        mentee = current_user.mentee
+        ready = current_user.mentee.ready
+        if request.method == 'GET':
+            form2.fullname.data = current_user.fullname
+            form2.username.data = current_user.username
+            form2.email.data = current_user.email
+            form2.phone.data = current_user.phone
+            form2.city.data = mentee.city
+            form2.gender.data = mentee.gender
+            form2.gender_pref.data = mentee.gender_pref
+            form2.language_pref.data = mentee.language_pref
+            form2.aspiration.data = mentee.aspiration
+            form2.b1.data = mentee.bq_1
+            form2.b2.data = mentee.bq_2
+            form2.hobbies.data = mentee.hobbies
+        else:
+            print("Inside else")
+            print(form2.validate_on_submit(), form2.submit2.data)
+            if form2.validate_on_submit() and form2.submit2.data:
+                print("Inside form")
+                current_user.fullname = form2.fullname.data
+                current_user.username = form2.username.data
+                current_user.email = form2.email.data
+                current_user.phone = form2.phone.data
+                current_user.mentee.city = form2.city.data
+                current_user.mentee.gender = form2.gender.data
+                current_user.mentee.gender_pref = form2.gender_pref.data
+                current_user.mentee.language_pref = form2.language_pref.data
+                current_user.mentee.aspiration = form2.aspiration.data
+                current_user.mentee.bq_1 = form2.b1.data
+                current_user.mentee.bq_2 = form2.b2.data
+                current_user.mentee.hobbies = form2.hobbies.data
+
+                location = geolocator.geocode(form2.city.data)
+                t_zone = tf.timezone_at(lng=location.longitude, lat=location.latitude)
+                pacific_now = datetime.datetime.now(pytz.timezone(t_zone))
+                offset = pacific_now.utcoffset().total_seconds() / 60 / 60
+                current_user.mentee.lat = location.latitude
+                current_user.mentee.long = location.longitude
+                current_user.mentee.time_delta = offset
+
+                if(
+                    current_user.mentee.city and
+                    current_user.mentee.gender and
+                    current_user.mentee.gender_pref and
+                    current_user.mentee.language_pref and
+                    current_user.mentee.aspiration and
+                    current_user.mentee.bq_1 and
+                    current_user.mentee.bq_2 and
+                    current_user.mentee.hobbies and
+                    current_user.mentee.lat and
+                    current_user.mentee.long and
+                    current_user.mentee.time_delta
+                ):
+                    current_user.mentee.ready = True
+                    ready = True
+
+                db.session.commit()
+                flash('Your account has been updated!', 'success')
+                return redirect(url_for('profile'))
+
+            if connect_form.validate_on_submit() and connect_form.connect.data:
+                pass
+            if disconnect_form.validate_on_submit() and disconnect_form.disconnect.data:
+                pass
+
+    elif current_user.urole == "MENTOR":
+        mentor = current_user.mentor
+        ready = current_user.mentor.ready
+
+        if request.method == 'GET':
+            form.fullname.data = current_user.fullname
+            form.username.data = current_user.username
+            form.email.data = current_user.email
+            form.phone.data = current_user.phone
+            form.city.data = mentor.city
+            form.gender.data = mentor.gender
+            form.language.data = mentor.language
+            form.expertise.data = mentor.expertise_1
+            form.b1.data = mentor.bq_1
+            form.b2.data = mentor.bq_2
+            form.hobbies.data = mentor.hobbies
+
+        else:
+            if form.validate_on_submit() and form.submit.data:
+                current_user.fullname = form.fullname.data
+                current_user.username = form.username.data
+                current_user.email = form.email.data
+                current_user.phone = form.phone.data
+                current_user.mentor.city = form.city.data
+                current_user.mentor.gender = form.gender.data
+                current_user.mentor.language = form.language.data
+                current_user.mentor.expertise_1 = form.expertise.data
+                current_user.mentor.bq_1 = form.b1.data
+                current_user.mentor.bq_2 = form.b2.data
+                current_user.mentor.hobbies = form.hobbies.data
+
+                location = geolocator.geocode(form.city.data)
+                t_zone = tf.timezone_at(lng=location.longitude, lat=location.latitude)
+                pacific_now = datetime.datetime.now(pytz.timezone(t_zone))
+                offset = pacific_now.utcoffset().total_seconds() / 60 / 60
+                current_user.mentor.lat = location.latitude
+                current_user.mentor.long = location.longitude
+                current_user.mentor.time_delta = offset
+
+                if (
+                        current_user.mentor.city and
+                        current_user.mentor.gender and
+                        current_user.mentor.language and
+                        current_user.mentor.expertise_1 and
+                        current_user.mentor.bq_1 and
+                        current_user.mentor.bq_2 and
+                        current_user.mentor.hobbies and
+                        current_user.mentor.lat and
+                        current_user.mentor.long and
+                        current_user.mentor.time_delta
+                ):
+                    current_user.mentor.ready = True
+                    ready = True
+
+                db.session.commit()
+                flash('Your account has been updated!', 'success')
+                return redirect(url_for('profile'))
+
+    return render_template('userprofile.html', mentorform=form, menteeform=form2, ready=ready,
+                           connect_form=connect_form, disconnect_form=disconnect_form)
 
 
 @app.route("/admin-login")

@@ -164,189 +164,435 @@ label{
  <div class="container1">
 	<h2 >My profile</h2>
 	<div class="image"><img class="img" src="profile.jpg" alt="profile_pic" ></div>
-	<form action=" " method="">
+	<form method="POST" action="">
+	{% if current_user.urole == "MENTOR" %}
+    {{ mentorform.hidden_tag() }}
+	{% for error in mentorform.username.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.email.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.fullname.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.b1.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.b2.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.hobbies.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.city.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.phone.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in mentorform.gender.errors %}}
+		g1:{{error}}
+	{% endfor %}
+		{% for error in mentorform.language.errors %}}
+		g2:{{error}}
+	{% endfor %}
+		{% for error in mentorform.expertise.errors %}}
+		asp:{{error}}
+	{% endfor %}
+
+	{% else %}
+	{{ menteeform.hidden_tag() }}
+	{% for error in menteeform.username.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.email.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.fullname.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.b1.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.b2.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.hobbies.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.city.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.phone.errors %}}
+		{{error}}
+	{% endfor %}
+		{% for error in menteeform.gender.errors %}}
+		g1:{{error}}
+	{% endfor %}
+		{% for error in menteeform.gender_pref.errors %}}
+		g2:{{error}}
+	{% endfor %}
+		{% for error in menteeform.language_pref.errors %}}
+		lang:{{error}}
+	{% endfor %}
+		{% for error in menteeform.aspiration.errors %}}
+		asp:{{error}}
+	{% endfor %}
+
+	{% endif %}
 	<div class="left"><!--LEFT SIDE ELEMENTS-->
 		<div class="f1">
+			{% if current_user.urole == "MENTOR" %}
 			<div class="flabel">
-				<label for="fname">Full name</label>
+				<label for="fname">{{mentorform.fullname.label}}</label>
 				</div>
 			<div class="fentry">
-				<input type="text" name="full name" value="Full name">
+<!--				<input type="text" name="full name" value="Full name">-->
+				{{mentorform.fullname(placeholder="Full Name")}}
 			</div>
-		</div>
-
-
-		<div class="f1">
+			{% else %}
 			<div class="flabel">
-				<label for="uname">Username</label>
+				<label for="fname">{{menteeform.fullname.label}}</label>
 				</div>
 			<div class="fentry">
-				<input type="text" name="user name" value="user name">
+<!--				<input type="text" name="full name" value="Full name">-->
+				{{menteeform.fullname(placeholder="Full Name")}}
 			</div>
+			{% endif %}
 		</div>
 
 
 		<div class="f1">
+			{% if current_user.urole == "MENTOR" %}
 			<div class="flabel">
-				<label for="email">Email-id</label>
+				<label for="uname">{{mentorform.username.label}}</label>
 				</div>
 			<div class="fentry">
-				<input type="email" name="email" value="email">
+<!--				<input type="text" name="user name" value="user name">-->
+				{{mentorform.username(placeholder="username")}}
 			</div>
-		</div>
-
-		<div class="f1">
+			{% else %}
 			<div class="flabel">
-				<label for="pnum">Phone no:</label>
+				<label for="uname">{{menteeform.username.label}}</label>
 				</div>
 			<div class="fentry">
-				<input type="text" name="number"  placeholder="+91 12345678" required>
+<!--				<input type="text" name="user name" value="user name">-->
+				{{menteeform.username(placeholder="username")}}
 			</div>
+			{% endif %}
 		</div>
 
 
 		<div class="f1">
+			{% if current_user.urole == "MENTOR" %}
 			<div class="flabel">
-				<label for="dob">Date of Birth</label>
+				<label for="email">{{mentorform.email.label}}</label>
 				</div>
-			<div class="fentry1">
-				<input type="date" name="dob" placeholder="dd/mm/yy" required>
+			<div class="fentry">
+<!--				<input type="email" name="email" value="email">-->
+				{{mentorform.email(placeholder="email")}}
 			</div>
+			{% else %}
+			<div class="flabel">
+				<label for="email">{{menteeform.email.label}}</label>
+				</div>
+			<div class="fentry">
+<!--				<input type="email" name="email" value="email">-->
+				{{menteeform.email(placeholder="email")}}
+			</div>
+			{% endif %}
 		</div>
+
+		<div class="f1">
+			{% if current_user.urole == "MENTOR" %}
+			<div class="flabel">
+				<label for="pnum">{{mentorform.phone.label}}</label>
+				</div>
+			<div class="fentry">
+<!--				<input type="text" name="number"  placeholder="+91 12345678" required>-->
+				{{mentorform.phone(placeholder="+919876543210")}}
+			</div>
+			{% else %}
+			<div class="flabel">
+				<label for="pnum">{{menteeform.phone.label}}</label>
+				</div>
+			<div class="fentry">
+<!--				<input type="text" name="number"  placeholder="+91 12345678" required>-->
+				{{menteeform.phone(placeholder="+919876543210")}}
+			</div>
+			{% endif %}
+		</div>
+
+
+<!--		<div class="f1">-->
+<!--			<div class="flabel">-->
+<!--				<label for="dob">Date of Birth</label>-->
+<!--				</div>-->
+<!--			<div class="fentry1">-->
+<!--				<input type="date" name="dob" placeholder="dd/mm/yy" required>-->
+<!--			</div>-->
+<!--		</div>-->
 
 
 
 		<div class="f1">
+			{% if current_user.urole == "MENTOR" %}
 			<div class="flabel">
-				<label for="city">Your lovely city</label>
+				<label for="city">{{mentorform.city.label}}</label>
 				</div>
 			<div class="fentry3">
-				<input list="city" name="city">
-				  <datalist id="city">
-					<option value="Bangalore">
-					<option value="Chennai">
-					<option value="Delhi">
-					<option value="Hyderabad">
-					<option value="Mumbai">
-				  </datalist>
+<!--				<input list="city" name="city">-->
+<!--				  <datalist id="city">-->
+<!--					<option value="Bangalore">-->
+<!--					<option value="Chennai">-->
+<!--					<option value="Delhi">-->
+<!--					<option value="Hyderabad">-->
+<!--					<option value="Mumbai">-->
+<!--				  </datalist>-->
+				{{mentorform.city()}}
 			</div>
-		</div>
-
-		<div class="f1">
+			{% else %}
 			<div class="flabel">
-				<label for="lang">Your preferred language</label>
+				<label for="city">{{menteeform.city.label}}</label>
 				</div>
 			<div class="fentry3">
-				<input list="lang" name="lang">
-				<datalist id="lang" name="lang" required>
-					<option value="English">
-					<option value="Hindi">
-					<option value="Kannada">
-					<option value="Tamil">
-					<option value="Telugu">
-				</datalist>
+			{{menteeform.city()}}
 			</div>
-		</div>
-		<div class="f1">
-			<div class="flabel">
-				<label for="gen">Gender</label>
-				</div>
-				<div class="fentry4">
-					<fieldset id=group1>
-					<input type="radio" id="gend-1" name="group1" value="female-1">
-					<label for="gender">female</label>
-					<input type="radio" id="gend-1" name="group1" value="male-1">
-					<label for="gender">male</label>
-					<input type="radio" id="gend-1" name="group1" value="other-1">
-					<label for="gender">other</label>
-					</fieldset>
-				</div>
+			{% endif %}
 		</div>
 
 		<div class="f1">
+			{% if current_user.urole=="MENTOR" %}
 			<div class="flabel">
-				<label for="lang">Gender preference</label>
+				<label for="lang">{{mentorform.language.label}}</label>
+				</div>
+			<div class="fentry3">
+<!--				<input list="lang" name="lang">-->
+<!--				<datalist id="lang" name="lang" required>-->
+<!--					<option value="English">-->
+<!--					<option value="Hindi">-->
+<!--					<option value="Kannada">-->
+<!--					<option value="Tamil">-->
+<!--					<option value="Telugu">-->
+<!--				</datalist>-->
+				{{mentorform.language()}}
+			</div>
+			{% else %}
+			<div class="flabel">
+				<label for="lang">{{menteeform.language_pref.label}}</label>
+				</div>
+			<div class="fentry3">
+<!--				<input list="lang" name="lang">-->
+<!--				<datalist id="lang" name="lang" required>-->
+<!--					<option value="English">-->
+<!--					<option value="Hindi">-->
+<!--					<option value="Kannada">-->
+<!--					<option value="Tamil">-->
+<!--					<option value="Telugu">-->
+<!--				</datalist>-->
+				{{menteeform.language_pref()}}
+			</div>
+			{% endif %}
+		</div>
+		<div class="f1">
+			{% if current_user.urole=="MENTOR" %}
+			<div class="flabel">
+				<label for="gen">{{mentorform.gender.label}}</label>
 				</div>
 				<div class="fentry4">
-					<fieldset id=group2>
-					<input type="radio" id="gend-2" name="group2" value="no pref-2">
-					<label for="gender">No preference</label>
-					<input type="radio" id="gend-2" name="group2" value="female-2">
-					<label for="gender">female</label>
-					<input type="radio" id="gend-2" name="group2" value="male-2">
-					<label for="gender">male</label>
-					</fieldset>
+<!--					<fieldset id=group1>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="female-1">-->
+<!--					<label for="gender">female</label>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="male-1">-->
+<!--					<label for="gender">male</label>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="other-1">-->
+<!--					<label for="gender">other</label>-->
+<!--					</fieldset>-->
+					{{mentorform.gender()}}
+				</div>
+			{% else %}
+			<div class="flabel">
+				<label for="gen">{{menteeform.gender.label}}</label>
+				</div>
+				<div class="fentry4">
+					{{menteeform.gender()}}
+				</div>
+			{% endif %}
+		</div>
+
+		{% if current_user.urole=="MENTEE" %}
+		<div class="f1">
+			<div class="flabel">
+				<label for="lang">{{menteeform.gender_pref.label}}</label>
+				</div>
+				<div class="fentry4">
+<!--					<fieldset id=group2>-->
+<!--					<input type="radio" id="gend-2" name="group2" value="no pref-2">-->
+<!--					<label for="gender">No preference</label>-->
+<!--					<input type="radio" id="gend-2" name="group2" value="female-2">-->
+<!--					<label for="gender">female</label>-->
+<!--					<input type="radio" id="gend-2" name="group2" value="male-2">-->
+<!--					<label for="gender">male</label>-->
+<!--					</fieldset>-->
+					{{menteeform.gender_pref()}}
 				</div>
 		</div>
+		{% endif %}
+
+		<div class="f1">
+			{% if current_user.urole=="MENTOR" %}
+			<div class="flabel">
+				<label for="gen">{{mentorform.expertise.label}}</label>
+				</div>
+				<div class="fentry4">
+<!--					<fieldset id=group1>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="female-1">-->
+<!--					<label for="gender">female</label>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="male-1">-->
+<!--					<label for="gender">male</label>-->
+<!--					<input type="radio" id="gend-1" name="group1" value="other-1">-->
+<!--					<label for="gender">other</label>-->
+<!--					</fieldset>-->
+					{{mentorform.expertise()}}
+				</div>
+			{% else %}
+			<div class="flabel">
+				<label for="gen">{{menteeform.aspiration.label}}</label>
+				</div>
+				<div class="fentry4">
+					{{menteeform.aspiration()}}
+				</div>
+			{% endif %}
+		</div>
+
 		</div><!--left side ends here-->
 		<!--right elemensts-->
 		<div class="right">
+
 		<div class="f1">
-			<div class="flabel">
-				<label for="filed_of_stdy">Tell us your field of study</label>
-				</div>
-			<div class="fentry2">
-				<textarea id="f_of_stdy" name="f_of_stdy" rows="10" cols="30" placeholder="Mathematics,Physics,Biology,Commerce....." required></textarea>
-			</div>
-		</div>
-		<div class="f1">
+
 			<div class="flabel">
 				<label for="behav_ques">Lets us know you better!</label>
 			</div>
+			{% if current_user.urole=="MENTOR" %}
 			<div class="fentry2">
 				<div class="innerfabel">
 				<label for="behav_ques">1......................................</label>
 				</div>
-				<textarea id="q1" name="bq1" rows="4" cols="50" placeholder="" required></textarea>
+<!--				<textarea id="q1" name="bq1" rows="4" cols="50" placeholder="" required></textarea>-->
+				{{mentorform.b1(cols="50", rows="4")}}
 				<div class="innerfabel">
 				<label for="behav_ques">2......................................</label>
 				</div>
-				<textarea id="q2" name="bq2" rows="4" cols="50" placeholder="" required></textarea>
-				<div class="innerfabel">
-				<label for="behav_ques">3......................................</label>
-				</div>
-				<textarea id="q3" name="bq3" rows="4" cols="50" placeholder="" required></textarea>
-				<div class="innerfabel">
-				<label for="behav_ques">4......................................</label>
-				</div>
-				<textarea id="q4" name="bq4" rows="4" cols="50" placeholder="" required></textarea>
-
+<!--				<textarea id="q2" name="bq2" rows="4" cols="50" placeholder="" required></textarea>-->
+				{{mentorform.b2(cols="50", rows="4")}}
 			</div>
+			{% else %}
+			<div class="fentry2">
+				<div class="innerfabel">
+				<label for="behav_ques">1......................................</label>
+				</div>
+<!--				<textarea id="q1" name="bq1" rows="4" cols="50" placeholder="" required></textarea>-->
+				{{menteeform.b1(cols="50", rows="4")}}
+				<div class="innerfabel">
+				<label for="behav_ques">2......................................</label>
+				</div>
+<!--				<textarea id="q2" name="bq2" rows="4" cols="50" placeholder="" required></textarea>-->
+				{{menteeform.b2(cols="50", rows="4")}}
+			</div>
+			{% endif %}
 		</div>
 		<div class="f1">
+			{% if current_user.urole=="MENTOR" %}
 			<div class="flabel">
-				<label for="hobies">Tell us your Hobies</label>
+				<label for="hobies">{{mentorform.hobbies.label}}</label>
 				</div>
 			<div class="fentry2">
-				<textarea id="hobies" name="hobies" rows="10" cols="30" placeholder="I love dancing,learning,cooking....." required></textarea>
+<!--				<textarea id="hobies" name="hobies" rows="10" cols="30" placeholder="I love dancing,learning,cooking....." required></textarea>-->
+				{{mentorform.hobbies(cols="30", rows="10", placeholder="I love dancing,learning,cooking.....")}}
 			</div>
+			{% else %}
+			<div class="flabel">
+				<label for="hobies">{{menteeform.hobbies.label}}</label>
+				</div>
+			<div class="fentry2">
+<!--				<textarea id="hobies" name="hobies" rows="10" cols="30" placeholder="I love dancing,learning,cooking....." required></textarea>-->
+				{{menteeform.hobbies(cols="30", rows="10", placeholder="I love dancing,learning,cooking.....")}}
+			</div>
+			{% endif %}
 		</div>
-
-
 
 
 		<div class="bottm_text">
 			<p >I'm Done</p>
-			<button class="update" >update</button>
+			{% if current_user.urole=="MENTOR" %}
+			{{mentorform.submit(class="update")}}
+			{% else %}
+			{{menteeform.submit2(class="update")}}
+			{% endif %}
+<!--			<button class="update" >update</button>-->
 		</div>
 
 
 	</form>
  </div>
- <div class="container2">
-	<button class="btn1" name="button1">click to connect to mentor</button>
-	<div class="mentor_text">
-		<p>
-		Name:jhon<br>
-		Number:8957648331<br>
-		email:abc@email.com<br>
-		language-known:english<br>
-		subject:psycology<br>
-		</p>
-		<button class="inner_btn" name="inn-button">connect</button>
-	</div>
-	<button class="btn2" name="button2">Disconnect</button>
-	</div>
+
+
+
+ {% if current_user.urole=="MENTEE" %}
+ 	{% if current_user.mentee.mentor_id %}
+	 <div class="container2">
+		<div class="mentor_text">
+			<p>
+			Name:{{current_user.mentee.mentor.fullname}}<br>
+			Number:{{current_user.mentee.mentor.phone}}<br>
+			email:abc@{{current_user.mentee.mentor.email}}.com<br>
+			language-known:{{current_user.mentee.mentor.language}}<br>
+			subject:{{current_user.mentee.mentor.expertise_1}}<br>
+			</p>
+			<button class="inner_btn" name="inn-button">connect</button>
+		</div>
+		<button class="btn2" name="button2">Disconnect</button>
+	 </div>
+ 	{% else %}
+ 	 <button class="btn1" name="button1">click to connect to mentor</button>
+ 	{% endif %}
+
+ {% else %}
+ 	{% if current_user.mentees|length > 0 %}
+ 		{% for mentee in current_user.mentees %}
+ 			<div class="container2">
+				<div class="mentor_text">
+					<p>
+					Name:{{mentee.fullname}}<br>
+					Number:{{mentee.phone}}<br>
+					email:abc@{{mentee.email}}.com<br>
+					gender:{{mentee.gender}}<br>
+					location:{{mentee.city}}<br>
+					mentee-aspiration:{{mentee.aspiration}}<br>
+					</p>
+				</div>
+			 </div>
+ 		{% endfor %}
+ 	{% else %}
+ 	<p>You currently have no mentees</p>
+ 	{% endif %}
+ {% endif %}
+<!-- <div class="container2">-->
+<!--	<button class="btn1" name="button1">click to connect to mentor</button>-->
+<!--	<div class="mentor_text">-->
+<!--		<p>-->
+<!--		Name:jhon<br>-->
+<!--		Number:8957648331<br>-->
+<!--		email:abc@email.com<br>-->
+<!--		language-known:english<br>-->
+<!--		subject:psycology<br>-->
+<!--		</p>-->
+<!--		<button class="inner_btn" name="inn-button">connect</button>-->
+<!--	</div>-->
+<!--	<button class="btn2" name="button2">Disconnect</button>-->
+<!--	</div>-->
  </body>
 
 </html>
